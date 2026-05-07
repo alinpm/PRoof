@@ -1,74 +1,43 @@
-# PRoof — PR Health Checker
+# PRoof
 
-A lightweight Python tool that checks the quality of GitHub pull requests before code review.
+> CLI tool to analyze GitHub PRs and score their review-readiness (0–100)
 
-## The Problem
+## Why
 
-Developers often submit pull requests that are too large, poorly described, or have messy commit history. This slows down code review and frustrates the whole team.
+Large, poorly described, or messy PRs slow down code review.
+PRoof checks PR quality before it hits the reviewer's queue.
 
-## What PRoof checks
+## What it checks
 
-- Files changed — more than 10 files is hard to review
-- Description — every PR needs context
-- Commits — more than 10 commits creates noise
-- Lines changed — more than 500 lines takes too long to review
-- Title — avoid uninformative names like fix, update, wip
-
-## Score
-
-PRoof gives every PR a score from 0 to 100:
-
-- 75-100 — Ready for review
-- 50-74 — Needs improvement
-- 0-49 — Not ready
-
-## Installation
-
-pip install PyGithub colorama
-
-## Usage
-
-# PRoof — PR Health Checker
-
-A lightweight Python tool that checks the quality of GitHub pull requests before code review.
-
-## The Problem
-
-Developers often submit pull requests that are too large, poorly described, or have messy commit history. This slows down code review and frustrates the whole team.
-
-## What PRoof checks
-
-- Files changed — more than 10 files is hard to review
-- Description — every PR needs context
-- Commits — more than 10 commits creates noise
-- Lines changed — more than 500 lines takes too long to review
-- Title — avoid uninformative names like fix, update, wip
+| Check | Threshold |
+|-------|-----------|
+| Files changed | ≤ 10 |
+| Description | present and meaningful |
+| Commits | ≤ 10 |
+| Lines changed | ≤ 500 |
+| Title | informative, not "fix" / "update" / "wip" |
 
 ## Score
 
-PRoof gives every PR a score from 0 to 100:
+| Score | Status |
+|-------|--------|
+| 75–100 | ✅ Ready for review |
+| 50–74 | ⚠️ Needs improvement |
+| 0–49 | ❌ Not ready |
 
-- 75-100 — Ready for review
-- 50-74 — Needs improvement
-- 0-49 — Not ready
-
-## Installation
+## Install
 
 pip install PyGithub colorama
 
 ## Usage
 
 export GITHUB_TOKEN="your_token"
-python3 proof.py owner/repository PR_number
+python3 proof.py owner/repo PR_number
 
 ## Example
 
 python3 proof.py alinpm/PRoof 1
 
-## Tech stack
+## Stack
 
-Python, PyGithub, GitHub API, colorama
-
-## Author
-
-Alina Syso — github.com/alinpm
+Python · PyGithub · GitHub API · colorama
