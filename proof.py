@@ -1,12 +1,18 @@
 import os
+import sys
 from github import Github, Auth
-from colorama import Fore, Style, init
+from colorama import Fore, init
 
 init(autoreset=True)
 
 TOKEN = os.environ.get("GITHUB_TOKEN")
-REPO_NAME = "alinpm/PRoof"
-PR_NUMBER = 1
+
+if len(sys.argv) == 3:
+    REPO_NAME = sys.argv[1]
+    PR_NUMBER = int(sys.argv[2])
+else:
+    REPO_NAME = "alinpm/PRoof"
+    PR_NUMBER = 1
 
 auth = Auth.Token(TOKEN)
 g = Github(auth=auth)
@@ -18,6 +24,7 @@ BAD_TITLES = ["fix", "update", "wip", "test", "patch", "changes"]
 
 print("=" * 40)
 print(f"PRoof — PR Health Check #{PR_NUMBER}")
+print(f"Repo: {REPO_NAME}")
 print("=" * 40)
 
 if pr.changed_files <= 10:
